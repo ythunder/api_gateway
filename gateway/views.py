@@ -132,6 +132,7 @@ def deleteAclInfo(request):
     if flag:
         return render_to_response('acl_view.html', {'result': res_acl})
 
+#end
 
 # 更改API接口信息
 def updateApiInfo(request):
