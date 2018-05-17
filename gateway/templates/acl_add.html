@@ -99,12 +99,12 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="api_view.html">
+                        <a href="/display-api/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                         </a>
                     </li>
                     <li class="sidebar-nav-link">
-                        <a href="api_add.html">
+                        <a href="add-api">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                         </a>
                     </li>
@@ -118,12 +118,12 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="version_view.html">
+                        <a href="/display-vers/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                         </a>
                     </li>
                     <li class="sidebar-nav-link">
-                        <a href="version_add.html">
+                        <a href="/add-vers/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                         </a>
                     </li>
@@ -137,13 +137,13 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="acl_view.html">
+                        <a href="/display-acl/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                         </a>
                     </li>
 
                     <li class="sidebar-nav-link">
-                        <a href="acl_add.html">
+                        <a href="/add-acl/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                         </a>
                     </li>
@@ -188,7 +188,7 @@
                             <div class="widget-body am-fr">
                                 <form action="/ins-acl/"   class="am-form tpl-form-line-form" method="get">
                                     <div class="am-form-group">
-                                        <label for="api" class="am-u-sm-3 am-form-label">API接口 <span class="tpl-form-line-small-title">API</span></label>
+                                        <label for="api" name="api_id" class="am-u-sm-3 am-form-label">API接口 <span class="tpl-form-line-small-title">API</span></label>
                                         <div class="am-u-sm-9">
                                             <select name="api_id" id="api_id" data-am-selected="{searchBox: 1}" style="display: none;" onchange="window.location.href='/add-acl?id='+this.options[this.options.selectedIndex].value">
                                                 <option></option>

@@ -1,4 +1,4 @@
-                                                                                                                                                                       <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,7 +21,7 @@
 
 </head>
 
-<body data-type="api_add">
+<body data-type="ver_add">
 <script src="../../assets/js/theme.js"></script>
 <div class="am-g tpl-g">
     <!-- 头部 -->
@@ -99,12 +99,12 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="api_view.html">
+                        <a href="/display-api/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                         </a>
                     </li>
                     <li class="sidebar-nav-link">
-                        <a href="api_add.html">
+                        <a href="/add-api/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                         </a>
                     </li>
@@ -118,12 +118,12 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="version_view.html">
+                        <a href="/display-vers/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                         </a>
                     </li>
                     <li class="sidebar-nav-link">
-                        <a href="version_add.html">
+                        <a href="/add-vers/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                         </a>
                     </li>
@@ -137,13 +137,13 @@
                 </a>
                 <ul class="sidebar-nav sidebar-nav-sub">
                     <li class="sidebar-nav-link">
-                        <a href="acl_view.html">
+                        <a href="/display-acl/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                         </a>
                     </li>
 
                     <li class="sidebar-nav-link">
-                        <a href="acl_add.html">
+                        <a href="/add-acl/">
                             <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                         </a>
                     </li>
@@ -186,7 +186,7 @@
                             </div>
 
                             <div class="widget-body am-fr">
-                                <form action="/ins-vers/" class="am-form tpl-form-line-form" method="post">
+                                <form action="/ins-vers/" class="am-form tpl-form-line-form" method="get">
                                     {% csrf_token %}
                                     <div class="am-form-group">
                                         <label for="version-name" class="am-u-sm-3 am-form-label">版本号 <span class="tpl-form-line-small-title">Version</span></label>

@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.db import models
 from django.shortcuts import render_to_response
 from datetime import datetime
-
-from django.template import RequestContext
-from django.views.decorators.csrf import csrf_protect
-
 from gateway.models import ApiInfo, VersInfo, AclList
+import model_redis as redis
 
 # 主页面
 def homePage(request):
-    return render_to_response('index.html')
+    req_today_num,req_error_num = redis.getReqNum()
+    req_num_array = redis.getDaysNum()
+    return render_to_response('index.html',{'req_error_num':req_error_num, 'req_today_num':req_today_num, 'req_num_array':req_num_array})
+
 
 # 添加api接口页面
 def addApiView(request):
@@ -35,25 +36,29 @@ def addAclView(request):
 
 # 添加新API接口信息
 def insertApiInfo(request):
+
     api_name = request.GET['api-name']
     api_desc = request.GET['description']
     status = request.GET['status']
 
     # 有效性检查
-    if status is not "on":
+    if status != "on":
         status = 0
         ApiInfo.insert(name=api_name,desc=api_desc, status=status)
 
-    # status为on时，model层默认为1
-    ApiInfo.insert(name=api_name, desc=api_desc)
+    else:
+        status = 1
+        ApiInfo.insert(name=api_name, desc=api_desc, status=status)
+
     flag, result = ApiInfo.getAllApiInfo()
+
+
     if flag:
         return render_to_response('api_view.html', {'results':result})
 
 
 
 #添加新版本信息
-@csrf_protect
 def insertVersInfo(request):
     vers_name = request.GET['version-name']
     api_id = request.GET['api']
@@ -75,10 +80,11 @@ def insertVersInfo(request):
 
     flag,res_vers = VersInfo.getAllVersInfo()
     if flag:
-        return render_to_response('version_view.html', {'res_vers':res_vers}, context_instance=RequestContext(request))
+        return render_to_response('version_view.html', {'res_vers':res_vers})
 
 
 def insertAclInfo(request):
+    # sqlite 添加数据
     vers_id = int(request.GET['vers_id'])
     api_id = int(request.GET['api_id'])
     match_req = None
@@ -185,7 +191,7 @@ def commitApiInfo(request, id):
 def commitVersInfo(request, id):
     vers_id = int(id)
     vers_name = request.GET['version-name']
-    api_id = request.GET['api']
+    # api_id = request.GET['api']
     ser_url = request.GET['version_uri']
 
     auth_type = None
@@ -196,7 +202,7 @@ def commitVersInfo(request, id):
     if 'status' in request.GET:
         status = request.GET['status']
 
-    VersInfo.update(id=vers_id,name=vers_name,apiId=api_id,url=ser_url,type=auth_type,status=status)
+    VersInfo.update(id=vers_id,name=vers_name, url=ser_url,type=auth_type,status=status)
 
     flag, res_vers = VersInfo.getAllVersInfo()
     if flag:

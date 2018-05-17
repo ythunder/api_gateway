@@ -117,12 +117,12 @@
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="version_view.html">
+                            <a href="/display-vers/">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                             </a>
                         </li>
                         <li class="sidebar-nav-link">
-                            <a href="version_add.html">
+                            <a href="/add-vers/">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                             </a>
                         </li>
@@ -136,13 +136,13 @@
                     </a>
                     <ul class="sidebar-nav sidebar-nav-sub">
                         <li class="sidebar-nav-link">
-                            <a href="acl_view.html">
+                            <a href="/display-acl/">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 查看
                             </a>
                         </li>
 
                         <li class="sidebar-nav-link">
-                            <a href="acl_add.html">
+                            <a href="/add-acl/">
                                 <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 添加
                             </a>
                         </li>
@@ -185,7 +185,7 @@
                             </div>
                             <div class="widget-statistic-body">
                                 <div class="widget-statistic-value">
-                                    12,169
+                                    {{ req_today_num }}
                                 </div>
                                 <span class="widget-statistic-icon am-icon-pie-chart"></span>
                             </div>
@@ -198,7 +198,7 @@
                             </div>
                             <div class="widget-statistic-body">
                                 <div class="widget-statistic-value">
-                                    786
+                                    {{ req_error_num }}
                                 </div>
                                 <span class="widget-statistic-icon am-icon-support"></span>
                             </div>
@@ -216,32 +216,6 @@
                                 </div>
                             </div>
                             <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="tpl-echarts">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
-                        <div class="widget am-cf">
-                            <div class="widget-head am-cf">
-                                <div class="widget-title am-fl">API网关负载</div>
-                                <div class="widget-function am-fr">
-                                    <a href="javascript:;" class="am-icon-cog"></a>
-                                </div>
-                            </div>
-                            <div class="widget-body widget-body-md am-fr">
-
-                                <div class="am-progress-title">CPU<span class="am-fr am-progress-title-more">15% / 100%</span></div>
-                                <div class="am-progress">
-                                    <div class="am-progress-bar" style="width: 15%"></div>
-                                </div>
-                                <div class="am-progress-title">RAM<span class="am-fr am-progress-title-more">75% / 100%</span></div>
-                                <div class="am-progress">
-                                    <div class="am-progress-bar  am-progress-bar-warning" style="width: 75%"></div>
-                                </div>
-                                <div class="am-progress-title">Network<span class="am-fr am-progress-title-more">35% / 100%</span></div>
-                                <div class="am-progress">
-                                    <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
-                                </div>
                             </div>
                         </div>
                     </div>

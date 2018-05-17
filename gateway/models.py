@@ -3,6 +3,12 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib import admin
 from datetime import datetime
+import model_redis as res
+
+
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api_gateway.settings')
+
 
 class ApiInfo(models.Model):
     api_name = models.CharField(max_length=16)
@@ -12,7 +18,6 @@ class ApiInfo(models.Model):
     upd_time = models.TimeField(max_length=32)
     version = models.CharField(max_length=8)
     status = models.IntegerField()
-
     def __unicode__(self):
         return u'{%s %s %d %s %s %d' % (self.api_name,
                                           self.api_desc, self.usr_id,
@@ -28,10 +33,15 @@ class ApiInfo(models.Model):
         api_info.usr_id = usrid
         api_info.cre_time = datetime.now()
         api_info.upd_time = datetime.now()
-        api_info.version = None
+        api_info.version = 1.0
         api_info.status = status
         api_info.save()
+
+        res.setCheckName(api_info.id, name, api_info.version)
+
         return True, api_info.id
+
+
 
     # 获取所有数据库中所有API信息
     @staticmethod
@@ -135,18 +145,21 @@ class VersInfo(models.Model):
         vers_info.ser_url = url
         vers_info.auth_type = type
         vers_info.status = status
-
         vers_info.save()
+
+        res.setCheckUrl(id, name, url, type)
+
         return True, vers_info
 
     # 更新版本信息
     @staticmethod
-    def update(id, name=None, apiId=None, url=None, type=None, status=None):
+    def update(id, name=None, url=None, type=None, status=None):
         new = VersInfo.objects.get(id=id)
+
         if name is not None:
             new.vers_name = name
-        if apiId is not None:
-            new.api_id = apiId
+        # if apiId is not None:
+        #     new.api_id = apiId
         if url is not None:
             new.ser_url = url
         if type is not None:
@@ -161,6 +174,10 @@ class VersInfo(models.Model):
                 new.status = 0
 
         new.save()
+
+        # 添加新数据
+        res.setCheckUrl(api_id=new.api_id, version=new.vers_name, url=new.ser_url, type=new.auth_type)
+
         return True, new
 
     @staticmethod
@@ -171,8 +188,8 @@ class VersInfo(models.Model):
 
 
 class AclList(models.Model):
-    api_id = models.IntegerField()
-    vers_id = models.IntegerField()
+    api_id = models.IntegerField(null=True)
+    vers_id = models.IntegerField(null=True)
     match_req = models.CharField(max_length=128)
     auth_type = models.IntegerField()
     cre_time = models.TimeField(max_length=32)
@@ -218,6 +235,9 @@ class AclList(models.Model):
         acl_info.upd_time = datetime.now()
         acl_info.status = status
 
+        if status:
+            res.setCheckMatch(api_id,vers_id,match_req)
+
         acl_info.save()
         return True, acl_info
 
@@ -237,6 +257,7 @@ class AclList(models.Model):
             new.status = status
 
         new.save()
+
         return True, new
 
     @staticmethod
