@@ -93,6 +93,7 @@ class ApiInfo(models.Model):
         if version is not None:
             new.version = version
 
+        res.setCheckName(id, new.api_name, new.version)
         new.save()
         return True, new
 
